@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+main{
+    height: 100vh;
+}
+body{
+    background-color: #262525;
+}
+.cim{
+    background-color: #1E1E1E;
+    height: 10vh;
+    width: 100%;
+    padding: 20px;
+    border: 2px solid #000;
+    text-align: center;
+}
+.cim h2{
+    color: #fff;
+}
+span{
+    color: #004BA8;
+}
+
+.myDivContainer{
+    align-items: center;
+    display: flex;
+}
+.login{
+    align-items: center;
+    border: 2px solid #000;
+    background-color: #1E1E1E;
+    padding: 20px;
+    height: 400px;
+}
+.log-data{
+    text-align: center;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    color: #004BA8; 
+}
+.log-data > p{
+    color: #fff;
+    font-style: oblique;
+    font-size: small;
+}
+.log-data a{
+    color: #cde0f7;
+    font-style: normal;
+    font-size: small;
+}
+.btn{
+    background-color: #004BA8;
+    
+}
+.btn:hover{
+    background-color: #004BA8;
+    filter: brightness(0.9);
+}
+
+.horizontal-line {
+    border: 2px solid #fff;
+    width: 100%;
+}
+
+
+.div-group {
+    display: flex;
+    width: 100vw;
+    height: 100%;
+    justify-content: center;
+}
+
+.bejelentkezes {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.form-box {
+    position: relative;
+}
+
+.show-button {
+    z-index: 100;
+    position: absolute;
+    color: black;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.udv-szoveg{
+    display: flex;
+    align-items: start;
+    justify-content: space-evenly;
+    gap: 10px;
+    border: 2px solid #000;
+    background-color: #1E1E1E;
+    color: #CBA008;
+    width: 550px;
+    padding: 10px;
+    bottom: 0;
+}
+
+.szovegek > p {
+    margin: 5px;
+    text-align: justify;
+}
+.logo{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
