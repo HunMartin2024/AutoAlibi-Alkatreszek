@@ -10,30 +10,25 @@
                     <h1 class="h3 mt-3 fw-bold mb-3">Regisztráció</h1>
         
                     <div class="form-floating mb-3 text-secondary">
-                      <input type="text" class="form-control" id="nameField" placeholder="">
+                      <input type="text" class="form-control" id="nameField" placeholder="" ng-model="reguser.name">
                       <label for="nameField">Felhasználónév</label>
                     </div>
-        
+
                     <div class="form-floating mb-3 text-secondary">
-                        <input type="text" class="form-control" id="telepfoneField" placeholder="">
-                        <label for="nameField">Telefonszám</label>
-                    </div>
-        
-                    <div class="form-floating mb-3 text-secondary">
-                      <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                      <input type="email" class="form-control" id="email" placeholder="name@example.com" ng-model="reguser.email">
                       <label for="email">E-mail</label>
                     </div>
         
                     <div class="form-floating mb-3 text-secondary">
-                      <input type="password" class="form-control" id="password" placeholder="Password">
+                      <input type="password" class="form-control" id="password" placeholder="Password" ng-model="reguser.password1">
                       <label for="password">Jelszó</label>
                     </div>
         
-                    <div class="form-floating mb-3 text-secondary">
-                      <input type="password" class="form-control" id="confirmPassword" placeholder="">
+                    <div class="form-floating mb-5 text-secondary">
+                      <input type="password" class="form-control" id="confirmPassword" placeholder="" ng-model="reguser.password2">
                       <label for="confirmPassword">Jelszó újra</label>
                     </div>
-                    <button class="btn w-100 py-2 text-white mb-2" id="regBtn" onclick="register()" type="submit">Regisztráció</button>
+                    <button class="btn w-100 py-2 text-white mb-3" id="regBtn" ng-click="register()" type="submit">Regisztráció</button>
                     <p class="new-reg">Már van fiókod?
                         <a href="#!/">Jelentkezz be!</a>
                     </p>
