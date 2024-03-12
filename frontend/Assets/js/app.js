@@ -18,6 +18,9 @@ app.config(function($routeProvider){
     .when('/newPass', {
         templateUrl: 'Views/newPassword.html'
     })
+    .when('/mainMenu', {
+        templateUrl: 'Views/mainMenu.html'
+    })
     // <-- ADMIN ROUTES 
     .otherwise(
         {redirectTo: '/'}
