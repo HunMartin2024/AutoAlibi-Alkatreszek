@@ -4,6 +4,10 @@
             <h2><span>AutóAlibi</span> Alkatrészek</h2>
         </div>
         
+        <div  ng-if="messages.length != 0" class="alert" role="alert" ng-class="{'alert-danger': messages[0].type == 'error', 'alert-success': messages[0].type == 'success'}">
+           {{messages[0].description}}
+        </div>
+
         <div class="myDivContainer">
             <div class="login">
             <div class="log-data">
