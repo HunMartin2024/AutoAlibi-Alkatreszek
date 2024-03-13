@@ -56,7 +56,8 @@ app.post('/login', async function(req, res){
         if(!results[0]) return res.status(400).send({msg: {description: "Hibás e-mail/jelszó!", type: "error"}});
         const compare = await bcrypt.compare(password, results[0].password);
         if(!compare) return res.status(400).send({msg: {description: "Hibás e-mail/jelszó!", type: "error"}});
-        res.send({msg: {description: "Sikeres bejelentkezés!", type: "success"}});
+        
+        res.send({msg: {description: "Sikeres bejelentkezés!", type: "success"}, user: {nev: results[0].name, email: results[0].email}});
     })
 })
 

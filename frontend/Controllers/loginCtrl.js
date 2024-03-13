@@ -1,4 +1,4 @@
-app.controller('loginCtrl', function($scope, $rootScope){
+app.controller('loginCtrl', function($scope, $rootScope, $timeout, $location){
     $scope.messages = [];
     $scope.loguser = {};
     $scope.passVisible = "password";
@@ -20,8 +20,14 @@ app.controller('loginCtrl', function($scope, $rootScope){
             const result = await axios.post(`${$rootScope.backendURL}/login`, $scope.loguser);
             console.log(result);
             $scope.messages.push(result.data.msg)
+            $rootScope.user = result.data.user;
         } catch (error) {
             $scope.messages.push(error.response.data?.msg)
+        }
+        if($scope.messages[0].type == "success"){   
+            $timeout(()=>{
+                $location.path('/mainMenu');
+            },2000)
         }
         $scope.$apply()
     }

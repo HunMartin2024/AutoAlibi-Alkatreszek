@@ -3,6 +3,7 @@ var app = angular.module('AutoAlibi', ['ngRoute']);
 app.run(function($rootScope){
     $rootScope.appTitle = 'AutoAlibi Alkatreszek';
     $rootScope.backendURL = 'http://localhost:3002';
+    $rootScope.user = {};
 });
 
 app.config(function($routeProvider){
@@ -19,7 +20,12 @@ app.config(function($routeProvider){
         templateUrl: 'Views/newPassword.html'
     })
     .when('/mainMenu', {
-        templateUrl: 'Views/mainMenu.html'
+        templateUrl: 'Views/mainMenu.html',
+        controller: 'mainMenuCtrl'
+    })
+    .when('/contact', {
+        templateUrl: 'Views/contact.html',
+        controller: 'contactCtrl'
     })
     // <-- ADMIN ROUTES 
     .otherwise(
