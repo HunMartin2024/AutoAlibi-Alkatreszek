@@ -1,0 +1,128 @@
+#contact{
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+}
+#contact h1{
+    color: white;
+}
+.navbar{
+    background-color:  #1E1E1E;
+    margin-bottom: 50px;
+}
+.navbar-brand h2{
+    color: #fff;
+}
+.navbar-brand span{
+    color: #004BA8;
+}
+.nav-item a{
+    color: #fff;
+}
+.nav-link{
+    position: relative;
+    width: max-content;
+}
+.nav-link:hover{
+    color: #fff;
+}
+.nav-link::after{
+    content: '';
+    opacity: 0;
+    transition: all 0.4s;
+    height: 1.5px;
+    width: 100%;
+    background-color: #004BA8;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.nav-link:hover::after{
+    opacity: 1;
+}
+
+p, i{
+    color: #fff;
+    font-family: "Roboto Mono", monospace;
+}
+#userText > p, #logOutText > p{
+    margin: 5px!important;
+}
+#logOutText{
+    text-decoration: none;
+}
+#logOutText > i, #userText > i{
+    color: #004BA8;
+}
+
+.cont{
+    padding: 30px;
+    border-radius: 10px;
+    width: 60vw;
+    height: 60vh;
+    background-color: #004BA8;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.right, .left{
+    width: 25vw;
+    height: 45vh;
+    background-color: #004BA8;
+    margin-top: 5rem;
+    word-wrap: break-word;
+}
+
+.containerText {
+    width: 100%;
+    height: 50px;
+    background-color: #1E1E1E;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.containerText p {
+    margin: 0;
+    font-size: 30px;
+    color: #fff;
+}
+.left p, .right p{
+    margin: 0;
+    font-family: "Roboto Mono", monospace;
+    color: #fff;
+    margin-bottom: 20px;
+}
+.line {
+    width: 80%;
+    height: 4px;
+    background-color: white;
+}
+  
+.phoneText a, .emailText a{
+    text-decoration: none;
+    color: #1E1E1E;
+    transition: color 0.3s;
+    font-weight: bold;
+}
+  
+.social-icons {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+}
+  
+.social-icons i {
+    font-size: 50px;
+    color: #1E1E1E;
+    margin-left: 10px;
+}
+
+
