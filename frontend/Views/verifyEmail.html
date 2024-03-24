@@ -1,0 +1,23 @@
+<div class="div-group">
+    <div class="jelszoujra">
+        <div class="cim">
+            <h2><span>AutóAlibi</span> Alkatrészek</h2>
+        </div>
+        
+        <div  ng-if="messages.length != 0" class="alert" role="alert" ng-class="{'alert-danger': messages[0].type == 'error', 'alert-success': messages[0].type == 'success'}">
+            {{messages[0].description}}
+         </div>
+        
+        <div class="container">
+            <div class="jelszo">
+            <div class="jelszo-data">
+                <h1 class="h3 mt-3 fw-bold mb-5">Sikeresen megerősítetted az E-mail címedet!</h1>
+                <p class="new-reg my-3">
+                    <a href="#!/" style="text-decoration: none;">Vissza a Bejelentkezésre!</a>
+                </p>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<img src="/frontend/Assets/img/Logo-login.svg" alt="logo" class="logo">
