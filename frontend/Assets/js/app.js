@@ -17,7 +17,15 @@ app.config(function($routeProvider){
         controller: 'registerCtrl'
     })
     .when('/newPass', {
-        templateUrl: 'Views/newPassword.html'
+        templateUrl: 'Views/newPassword.html',
+        controller: 'newPassCtrl',
+        resolve: {
+            function($location) {
+                if(!$location.search().token){
+                    $location.path('/')
+                }
+            }
+        }
     })
     .when('/mainMenu', {
         templateUrl: 'Views/mainMenu.html',
@@ -26,6 +34,14 @@ app.config(function($routeProvider){
     .when('/contact', {
         templateUrl: 'Views/contact.html',
         controller: 'contactCtrl'
+    })
+    .when('/forgetPass', {
+        templateUrl: 'Views/forgetPass.html',
+        controller: 'forgetPassCtrl'
+    })
+    .when('/verifyEmail', {
+        templateUrl: 'Views/verifyEmail.html',
+        controller: 'verifyEmailCtrl'
     })
     // <-- ADMIN ROUTES 
     .otherwise(
