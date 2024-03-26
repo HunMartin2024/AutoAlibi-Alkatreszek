@@ -21,6 +21,7 @@ app.controller('loginCtrl', function($scope, $rootScope, $timeout, $location){
             console.log(result);
             $scope.messages.push(result.data.msg)
             $rootScope.user = result.data.user;
+            sessionStorage.setItem("user", JSON.stringify(result.data.user))
         } catch (error) {
             $scope.messages.push(error.response.data?.msg)
         }
