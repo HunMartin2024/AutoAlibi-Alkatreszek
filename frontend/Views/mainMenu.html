@@ -8,16 +8,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Főoldal</a>
+                        <a class="nav-link" aria-current="page" href="#!/mainMenu">Főoldal</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Kapcsolat</a>
+                        <a class="nav-link" aria-current="page" href="#!/mainMenu/contact">Kapcsolat</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Webshop</a>
+                        <a class="nav-link" aria-current="page" href="#!/mainMenu/webshop">Webshop</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Beállítások</a>
+                        <a class="nav-link" aria-current="page" href="#!/mainMenu/settings">Beállítások</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
@@ -27,7 +27,7 @@
                                 <i class="bi bi-person-circle fa-2x"></i>
                                 <p class="text-center">{{user.nev}}</p>
                             </div>
-                            <a id="logOutText" class="d-flex flex-column align-items-center justify-content-center">
+                            <a ng-click="logOut()" id="logOutText" class="d-flex flex-column align-items-center justify-content-center">
                                 <i class="bi bi-box-arrow-in-right fa-2x"></i>
                                 <p>Kijelentkezés</p>
                             </a>
