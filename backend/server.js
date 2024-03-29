@@ -36,23 +36,32 @@ app.post('/register', async function (req, res){
     const hash = await bcrypt.hash(password1, salt);
     const verifyEmail = utils.randomString(100);
 
-    pool.query(`INSERT INTO users(name, email, password, verifyEmail) VALUES ('${name}','${email}','${hash}', '${verifyEmail}')`, (err, results)=>{
-        if(err) {
+    pool.query(`SELECT email from users WHERE email = '${email}'`, (err, results) =>{
+        if(err){
             console.error(err);
             res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
-            return
+            return 
         }
-        transporter.sendMail({
-            from: "Auto Alibi <autoalibi2024@gmail.com>",
-            to: email,
-            subject: "Sikeres regisztráció!",
-            html: `<h1>Sikeresen regisztrált az AutóAlibi weboldalra!</h1>
-            <hr>
-            <p>Az E-mail címed megerősítéséhez kattinst az alábbi linkre:</p>
-            <a href="http://localhost:5500/frontend/#!/verifyEmail?token=${verifyEmail}">http://localhost:5500/frontend/#!/verifyEmail?token=${verifyEmail}</a>
-            `
+        if(results[0]) return res.status(400).send({msg: {description: "Ez az Email már regisztrálva van!", type: "error"}});
+
+        pool.query(`INSERT INTO users(name, email, password, verifyEmail) VALUES ('${name}','${email}','${hash}', '${verifyEmail}')`, (err, results)=>{
+            if(err) {
+                console.error(err);
+                res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
+                return
+            }
+            transporter.sendMail({
+                from: "Auto Alibi <autoalibi2024@gmail.com>",
+                to: email,
+                subject: "Sikeres regisztráció!",
+                html: `<h1>Sikeresen regisztrált az AutóAlibi weboldalra!</h1>
+                <hr>
+                <p>Az E-mail címed megerősítéséhez kattinst az alábbi linkre:</p>
+                <a href="http://localhost:5500/frontend/#!/verifyEmail?token=${verifyEmail}">http://localhost:5500/frontend/#!/verifyEmail?token=${verifyEmail}</a>
+                `
+            })
+            res.send({msg: {description: "Sikeres regisztráció!", type: "success"}})
         })
-        res.send({msg: {description: "Sikeres regisztráció!", type: "success"}})
     })
 })
 
@@ -160,10 +169,6 @@ app.post('/verifyEmail', async function (req, res){
     })
 
 })
-
-
-
-
   app.listen(port, () => {
     console.log(`Server listening on port ${port}...`);
 });
