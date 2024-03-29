@@ -1,0 +1,74 @@
+<div id="webshop" class="pb-5">
+    <nav class="navbar navbar-expand-lg mb-5" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><h1><span>AutóAlibi</span> Alkatrészek</h1></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#!/mainMenu">Főoldal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#!/mainMenu/contact">Kapcsolat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#!/mainMenu/webshop">Webshop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#!/mainMenu/settings">Beállítások</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <div class="d-flex flex-row align-items-center">
+                            <div  id="userText" class="d-flex flex-column align-items-center">
+                                <i class="bi bi-person-circle fa-2x"></i>
+                                <p class="text-center">{{user.nev}}</p>
+                            </div>
+                            <a ng-click="logOut()" id="logOutText" class="d-flex flex-column align-items-center justify-content-center">
+                                <i class="bi bi-box-arrow-in-right fa-2x"></i>
+                                <p>Kijelentkezés</p>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="cards">
+        <div class="webshop-card">
+            <p>Szűrők</p>
+            <img src="/frontend/Assets/img/car-airfilter.svg" alt="logo">
+        </div>
+        <div class="webshop-card">
+            <p>Fékberendezés</p>
+            <img src="/frontend/Assets/img/car-break.svg" alt="logo">
+        </div>
+        <div class="webshop-card">
+            <p>Tömítések</p>
+            <img src="/frontend/Assets/img/car-seals.svg" alt="logo">
+        </div>
+        <div class="webshop-card">
+            <p>Olajok, folyadékok</p>
+            <img src="/frontend/Assets/img/car-oil.svg" alt="logo">
+        </div>
+        <div class="webshop-card">
+            <p>Kuplung</p>
+            <img src="/frontend/Assets/img/car-clucth.svg" alt="logo">
+        </div>
+        <div class="webshop-card">
+            <p>Belső felszerelés</p>
+            <img src="/frontend/Assets/img/car-carpit.svg" alt="logo">
+        </div>
+        <div class="webshop-card">
+            <p>Karosszéria</p>
+            <img src="/frontend/Assets/img/car-door.svg" alt="logo">
+        </div>
+        <div class="webshop-card">
+            <p>Világítás</p>
+            <img src="/frontend/Assets/img/car-lights.svg " alt="logo">
+        </div>
+    </div>
+</div>
