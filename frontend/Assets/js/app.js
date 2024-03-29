@@ -59,6 +59,27 @@ app.config(function($routeProvider){
             }
         }
     })
+    .when('/mainMenu/webshop', {
+        templateUrl: 'Views/webshop.html',
+        resolve: {
+            function($rootScope, $location) {
+                if(!$rootScope.user.email){
+                    $location.path('/')
+                }
+            }
+        }
+    })
+    .when('/mainMenu/webshopItems', {
+        templateUrl: 'Views/webshopItems.html',
+        controller: 'webshopItemsCtrl',
+        resolve: {
+            function($rootScope, $location) {
+                if(!$rootScope.user.email){
+                    $location.path('/')
+                }
+            }
+        }
+    })
     .when('/forgetPass', {
         templateUrl: 'Views/forgetPass.html',
         controller: 'forgetPassCtrl'
