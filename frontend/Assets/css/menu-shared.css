@@ -8,7 +8,7 @@
     color: #004BA8;
 }
 .nav-item a{
-    color: #fff;
+    color: #fff!important;
 }
 .nav-link{
     position: relative;

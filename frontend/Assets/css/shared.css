@@ -4,6 +4,9 @@
     box-sizing: border-box;
     font-family: "Roboto Mono", monospace;
 }
+h3, p{
+    margin: 0!important;
+}
 main{
     min-height: 100vh;
 }
