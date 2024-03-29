@@ -6,53 +6,6 @@
 #mainMenu h1{
     color: white;
 }
-.navbar{
-    background-color:  #1E1E1E;
-}
-.navbar-brand h2{
-    color: #fff;
-}
-.navbar-brand span{
-    color: #004BA8;
-}
-.nav-item a{
-    color: #fff;
-}
-.nav-link{
-    position: relative;
-    width: max-content;
-}
-.nav-link:hover{
-    color: #fff;
-}
-.nav-link::after{
-    content: '';
-    opacity: 0;
-    transition: all 0.4s;
-    height: 1.5px;
-    width: 100%;
-    background-color: #004BA8;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
-
-.nav-link:hover::after{
-    opacity: 1;
-}
-
-p, i{
-    color: #fff;
-}
-#userText > p, #logOutText > p{
-    margin: 5px!important;
-}
-#logOutText{
-    text-decoration: none;
-}
-#logOutText > i, #userText > i{
-    color: #004BA8;
-}
 
 .order{
     align-items: center;
@@ -68,16 +21,17 @@ p, i{
     padding: 10px;
     color: #fff;
 }
-table {
+#rendelesek {
     width: 100%;
     margin-top: 10px;
     margin: 0 auto;
 }
 
-th, td {
+#rendelesek th, #rendelesek td {
     padding: 10px;
     border: 1px solid #21272b;
     text-align: center;
     color: #fff;
     font-size: 1.2rem;
+    background-color: #1E1E1E;
 }

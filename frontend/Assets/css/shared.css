@@ -1,7 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Mono", monospace;
+}
+main{
+    min-height: 100vh;
+}
+body{
+    background-color: #262525;
+}
+span{
+    color: #004BA8;
+}
+.div-group {
+    display: flex;
+    width: 100vw;
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    z-index: 10;
+}
+
+.form-container{
+    margin: 30px;
+    align-items: center;
+    border: 2px solid #000;
+    background-color: #1E1E1E;
+    padding: 20px;
+    text-align: center;
+    justify-content: center;
+    width: 350px;
+    margin: 0 auto;
+    color: #004BA8; 
+}
+.form-container > p{
+    color: #fff;
+    font-style: oblique;
+    font-size: small;
+}
+.form-container a{
+    color: #cde0f7;
+    font-style: normal;
+    font-size: small;
+}
 .cim{
     background-color: #1E1E1E;
     height: 10vh;
-    width: 100%;
+    width: max-content;
     padding: 20px;
     border: 2px solid #000;
     text-align: center;
@@ -9,62 +57,12 @@
 .cim h2{
     color: #fff;
 }
-span{
-    color: #004BA8;
-}
-
-.myDivContainer{
-    align-items: center;
-    display: flex;
-}
-
-.jelszo{
-    margin: 30px;
-    align-items: center;
-    border: 2px solid #000;
-    background-color: #1E1E1E;
-    padding: 20px;
-}
-.jelszo-data{
-    text-align: center;
-    justify-content: center;
-    width: 350px;
-    margin: 0 auto;
-    color: #004BA8; 
-}
-.jelszo-data  > p{
-    color: #fff;
-    font-style: oblique;
-    font-size: small;
-}
-.jelszo-data a{
-    color: #cde0f7;
-    font-style: normal;
-    font-size: small;
-}
 .btn{
     background-color: #004BA8;
-    
 }
 .btn:hover{
     background-color: #004BA8;
     filter: brightness(0.9);
-}
-
-.div-group {
-    display: flex;
-    width: 100vw;
-    height: 100%;
-    justify-content: center;
-}
-
-.jelszoujra {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
 }
 .logo{
     position: absolute;

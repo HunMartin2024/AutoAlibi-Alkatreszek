@@ -8,22 +8,18 @@
             {{messages[0].description}}
          </div>
         
-        <div class="container">
-            <div class="jelszo">
-            <div class="jelszo-data">
-                <h1 class="h3 mt-3 fw-bold mb-5">Elfelejtett jelszó</h1>
-            
-                <div class="form-floating mb-3 text-secondary form-box">
-                    <p class="show-button"><i class="fa-solid fa-eye"></i></p>
-                    <input type="email" class="form-control" id="floatingEmail" placeholder="E-mail" ng-model="email">
-                    <label for="floatingEmail">E-mail</label>
-                </div>
-                <button class="btn w-100 py-2 text-white mb-2" id="logBtn"  ng-click="sendEmail()" type="submit">Emlékeztető küldés</button>
-                <p class="new-reg my-3">
-                    <a href="#!/" style="text-decoration: none;">Vissza a Bejelentkezésre!</a>
-                </p>
+        <div class="container form-container">
+            <h1 class="h3 mt-3 fw-bold mb-5">Elfelejtett jelszó</h1>
+        
+            <div class="form-floating mb-3 text-secondary form-box">
+                <p class="show-button"><i class="fa-solid fa-eye"></i></p>
+                <input type="email" class="form-control" id="floatingEmail" placeholder="E-mail" ng-model="email">
+                <label for="floatingEmail">E-mail</label>
             </div>
-            </div>
+            <button class="btn w-100 py-2 text-white mb-2" id="logBtn"  ng-click="sendEmail()" type="submit">Emlékeztető küldés</button>
+            <p class="new-reg my-3">
+                <a href="#!/" style="text-decoration: none;">Vissza a Bejelentkezésre!</a>
+            </p>
         </div>
     </div>
 </div>
