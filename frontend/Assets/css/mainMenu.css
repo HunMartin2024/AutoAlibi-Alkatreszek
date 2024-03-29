@@ -1,7 +1,7 @@
 #mainMenu{
     width: 100vw;
-    height: 100vh;
-    background-color: white;
+    min-height: 100vh;
+    background-color: #5a5959;
 }
 #mainMenu h1{
     color: white;
