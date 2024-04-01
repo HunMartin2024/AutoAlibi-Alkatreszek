@@ -16,6 +16,8 @@
     height: 250px;
     display: flex;
     flex-direction: column;
+    gap: 20px;
+    text-decoration: none;
 }
 .webshop-card img{
     width: 150px;
@@ -23,7 +25,7 @@
     align-self: center;
     fill: #1e1e1e;
 }
-.webshop-card > p{
+.webshop-card  p{
     background-color: #1e1e1e;
     color: #fff;
     position: relative;
