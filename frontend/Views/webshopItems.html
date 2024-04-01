@@ -39,28 +39,25 @@
     </nav>
     <div class="webshop-container">
         <div class="webshop-sidebar col-2">
-            <a href="#">Szűrők</a>
-            <a href="#">Fékberendezés</a>
-            <a href="#">Tömítések</a>
-            <a href="#">Olajok, folyadékok</a>
-            <a href="#">Kuplung</a>
-            <a href="#">Belső felszerelés</a>
-            <a href="#">Karosszéria</a>
-            <a href="#">Világítás</a>
+            <a href="#!/mainMenu/webshopItems?type=szurok">Szűrők</a>
+            <a href="#!/mainMenu/webshopItems?type=fek">Fékberendezés</a>
+            <a href="#!/mainMenu/webshopItems?type=tomitesek">Tömítések</a>
+            <a href="#!/mainMenu/webshopItems?type=olajokesfolyadekok">Olajok, folyadékok</a>
+            <a href="#!/mainMenu/webshopItems?type=kuplung">Kuplung</a>
+            <a href="#!/mainMenu/webshopItems?type=belsofelszereles">Belső felszerelés</a>
+            <a href="#!/mainMenu/webshopItems?type=karosszeria">Karosszéria</a>
+            <a href="#!/mainMenu/webshopItems?type=vilagitas">Világítás</a>
         </div>
         <div class="webshop-content col-10">
             <input class="form-control" type="text" id="webshop-searchbar" placeholder="Keresés...">
             <div class="webshop-item" ng-repeat="item in items">
-                <img src="/frontend/Assets/img/xddd.jpg">
+                <img src="/frontend/Assets/img{{item.kep}}">
                 <div>
                     <h3>{{item.nev}}</h3>
                     <p>{{item.tipus}}</p>
                 </div>
                 <ul>
-                    <li>{{item.forma}}</li>
-                    <li>{{item.hossz}}</li>
-                    <li>{{item.szelesseg}}</li>
-                    <li>{{item.magassag}}</li>
+                    <li ng-repeat="adat in item.adatok">{{adat}}</li>
                 </ul>
                 <p>Alkatrész ára</p>
                 <button class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Kosár</button>

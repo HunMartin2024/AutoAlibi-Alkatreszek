@@ -169,6 +169,19 @@ app.post('/verifyEmail', async function (req, res){
     })
 
 })
+
+app.get('/webshopItems', async function(req, res){
+    const {type} = req.query
+    if(!type){
+        return res.status(400).send({msg: {description: "Nincs típus megadva!", type: "error"}});
+    }
+    pool.query(`SELECT * FROM items WHERE AlkatreszTipus = '${type}'`, async (err, results)=>{
+        if(err){
+            res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
+        }
+        res.send(results)
+    })
+})
   app.listen(port, () => {
     console.log(`Server listening on port ${port}...`);
 });
