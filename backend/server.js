@@ -182,6 +182,17 @@ app.get('/webshopItems', async function(req, res){
         res.send(results)
     })
 })
-  app.listen(port, () => {
+
+app.post('/webshopCart', async function(req, res){
+    const data = req.body;
+    const IDs = Object.keys(data)
+    pool.query(`SELECT * FROM items WHERE id IN (${IDs.join(", ")})`, async (err, results)=>{
+        if(err){
+            res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
+        }
+        res.send(results)
+    })
+})
+app.listen(port, () => {
     console.log(`Server listening on port ${port}...`);
 });

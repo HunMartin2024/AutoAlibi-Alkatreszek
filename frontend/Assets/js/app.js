@@ -4,6 +4,7 @@ app.run(function($rootScope, $location){
     $rootScope.appTitle = 'AutoAlibi Alkatreszek';
     $rootScope.backendURL = 'http://localhost:3002';
     $rootScope.user = {};
+    $rootScope.kosar = JSON.parse(localStorage.getItem("kosar")) || {}
 
     if(sessionStorage.getItem("user")){
         $rootScope.user = JSON.parse(sessionStorage.getItem("user"));
@@ -72,6 +73,17 @@ app.config(function($routeProvider){
     .when('/mainMenu/webshopItems', {
         templateUrl: 'Views/webshopItems.html',
         controller: 'webshopItemsCtrl',
+        resolve: {
+            function($rootScope, $location) {
+                if(!$rootScope.user.email){
+                    $location.path('/')
+                }
+            }
+        }
+    })
+    .when('/mainMenu/webshopCart', {
+        templateUrl: 'Views/webshopCart.html',
+        controller: 'webshopCartCtrl',
         resolve: {
             function($rootScope, $location) {
                 if(!$rootScope.user.email){
