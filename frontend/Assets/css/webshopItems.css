@@ -2,7 +2,7 @@
     overflow-x: hidden;
     display: flex;
     flex-direction: row;
-    width: 100vw;
+    width: 100%;
 }
 .webshop-sidebar a{
     margin: 5px;
@@ -41,6 +41,7 @@
 .webshop-item img{
     margin-right: 50px;
     width: 100px;
+    height: 100px;
 }
 .webshop-item > ul{
     display: flex;

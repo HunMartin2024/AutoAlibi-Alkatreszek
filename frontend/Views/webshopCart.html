@@ -1,4 +1,4 @@
-<div id="webshopItems" class="pb-5">
+<div id="webshopCar" class="pb-5">
     <nav class="navbar navbar-expand-lg mb-5" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><h1><span>AutóAlibi</span> Alkatrészek</h1></a>
@@ -41,32 +41,34 @@
             </div>
         </div>
     </nav>
-    <div class="webshop-container">
-        <div class="webshop-sidebar col-2">
-            <a href="#!/mainMenu/webshopItems?type=szurok">Szűrők</a>
-            <a href="#!/mainMenu/webshopItems?type=fek">Fékberendezés</a>
-            <a href="#!/mainMenu/webshopItems?type=tomitesek">Tömítések</a>
-            <a href="#!/mainMenu/webshopItems?type=olajokesfolyadekok">Olajok, folyadékok</a>
-            <a href="#!/mainMenu/webshopItems?type=kuplung">Kuplung</a>
-            <a href="#!/mainMenu/webshopItems?type=belsofelszereles">Belső felszerelés</a>
-            <a href="#!/mainMenu/webshopItems?type=karosszeria">Karosszéria</a>
-            <a href="#!/mainMenu/webshopItems?type=vilagitas">Világítás</a>
+    <div class="order">
+        <div class="orderText">
+            <h2>Kosár tartalma</h2>
         </div>
-        <div class="webshop-content col-10">
-            <input class="form-control" type="text" id="webshop-searchbar" placeholder="Keresés...">
-            <div class="webshop-item" ng-repeat="item in items">
-                <img src="/frontend/Assets/img{{item.kep}}">
-                <div>
-                    <h3>{{item.nev}}</h3>
-                    <p>{{item.tipus}}</p>
-                </div>
-                <ul>
-                    <li ng-repeat="adat in item.adatok">{{adat}}</li>
-                </ul>
-                <p>{{item.ar + "Ft"}}</p>
-                <input class="form-control inputDB" type="number" min="1" max="20" value="1" ng-model="mennyiseg[$index]">
-                <button class="btn btn-primary" ng-click="hozzaadas(item.id, mennyiseg[$index])"><i class="fas fa-shopping-cart"></i> Kosár</button>
-            </div>
-        </div>
+        <table id="rendelesek">
+            <thead>
+                <tr>
+                    <th scope="col">Termék neve</th>
+                    <th scope="col">Termék képe</th>
+                    <th scope="col">Mennyiség</th>
+                    <th scope="col">Ár</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="message.length != 0">
+                    <td colspan="4">{{message}}</td>
+                </tr>
+                <tr ng-repeat="item in items">
+                    <td class="bg-white text-black">{{item.nev}}</td>
+                    <td class="bg-white text-black"><img src="/frontend/Assets/img{{item.kep}}" height="50"></td>
+                    <td class="bg-white text-black">{{item.mennyiseg}}</td>
+                    <td class="bg-white text-black">{{item.ar * item.mennyiseg}} Ft</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Összesen:{{items.length}}</td>
+                    <td>{{osszeg}} Ft</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

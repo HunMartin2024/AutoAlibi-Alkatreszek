@@ -32,13 +32,13 @@
 .nav-link:hover::after{
     opacity: 1;
 }
-#userText > p, #logOutText > p{
+#userText > p, #logOutText > p, #kosar > p{
     color: #fff;
     margin: 5px!important;
 }
-#logOutText{
+#logOutText, #kosar{
     text-decoration: none;
 }
-#logOutText > i, #userText > i{
+#logOutText > i, #userText > i, #kosar > i{
     color: #004BA8;
 }
