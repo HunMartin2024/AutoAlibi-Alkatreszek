@@ -177,7 +177,7 @@ app.get('/webshopItems', async function(req, res){
     }
     pool.query(`SELECT * FROM items WHERE AlkatreszTipus = '${type}'`, async (err, results)=>{
         if(err){
-            res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
+            return res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
         }
         res.send(results)
     })
@@ -188,10 +188,24 @@ app.post('/webshopCart', async function(req, res){
     const IDs = Object.keys(data)
     pool.query(`SELECT * FROM items WHERE id IN (${IDs.join(", ")})`, async (err, results)=>{
         if(err){
-            res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
+            return res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
         }
         res.send(results)
     })
+})
+app.post('/order', async function(req, res){
+    console.log(req.body)
+    const {szamlazasi, szallitasi, kosar, fizetesimod} = req.body;
+    if(!szallitasi || !szamlazasi || !kosar || !fizetesimod) return  res.status(400).send({msg: {description: "Hiányzó adatok!", type: "error"}})
+    pool.query(`INSERT INTO orders (szamnev, szamtel, szamiranyitoszam, szamvaros, szamcim, szallnev, szalltel, szalliranyitoszam, szallvaros, szallcim, fizetestipus, rendeles) VALUES ('${szamlazasi.nev}', '${szamlazasi.telephone}', '${szamlazasi.postalcode}', '${szamlazasi.city}', '${szamlazasi.address}', '${szallitasi.nev}', '${szallitasi.telephone}', '${szallitasi.postalcode}', '${szallitasi.city}', '${szallitasi.address}', '${fizetesimod}', '${JSON.stringify(kosar)}')`, async (err, results) =>{
+        if(err){
+            console.error(err)
+            res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
+            return
+        }
+        res.send({msg: {description: "Sikeres rendelés!", type: "success"}})
+    });
+
 })
 app.listen(port, () => {
     console.log(`Server listening on port ${port}...`);
