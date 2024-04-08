@@ -92,6 +92,17 @@ app.config(function($routeProvider){
             }
         }
     })
+    .when('/mainMenu/userData', {
+        templateUrl: 'Views/userData.html',
+        controller: 'userDataCtrl',
+        resolve: {
+            function($rootScope, $location) {
+                if(!$rootScope.user.email){
+                    $location.path('/')
+                }
+            }
+        }
+    })
     .when('/forgetPass', {
         templateUrl: 'Views/forgetPass.html',
         controller: 'forgetPassCtrl'

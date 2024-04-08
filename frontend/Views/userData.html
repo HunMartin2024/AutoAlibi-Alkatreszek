@@ -1,0 +1,88 @@
+<div id="userData" class="pb-5">
+    <nav class="navbar navbar-expand-lg mb-5" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><h1><span>AutóAlibi</span> Alkatrészek</h1></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#!/mainMenu">Főoldal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#!/mainMenu/contact">Kapcsolat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#!/mainMenu/webshop">Webshop</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <div class="d-flex flex-row align-items-center">
+                            <a href="#!/mainMenu/webshopCart" id="kosar" class="d-flex flex-column align-items-center">
+                                <i class="bi bi-cart3 fa-2x"></i>
+                                <p class="text-center">Kosár{{}}</p>
+                            </a>
+                            <div id="userText" class="d-flex flex-column align-items-center">
+                                <i class="bi bi-person-circle fa-2x"></i>
+                                <p class="text-center">{{user.nev}}</p>
+                            </div>
+                            <a ng-click="logOut()" id="logOutText" class="d-flex flex-column align-items-center justify-content-center">
+                                <i class="bi bi-box-arrow-in-right fa-2x"></i>
+                                <p>Kijelentkezés</p>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container cont">
+        <div class="containerText">
+            <p>Vásárló adatai</p>
+        </div>
+        <div class="d-flex p-3 justify-content-evenly flex-wrap mb-5 fw-bold text-white">
+            <div>
+                <h2>Számlázási adatok</h2>
+                <label for="nameField">Név</label>
+                <input type="text" class="form-control mb-2" id="nameField" ng-model="szamlazasi.nev">
+                <label for="telephoneField">Telefonszám</label>
+                <input type="text" class="form-control mb-2" id="telephoneField" ng-model="szamlazasi.telephone">
+                <label for="postalCodeField">Irányítószám</label>
+                <input type="text" class="form-control mb-2" id="postalCodeField" ng-model="szamlazasi.postalcode">
+                <label for="city">Város</label>
+                <input type="text" class="form-control mb-2" id="city" ng-model="szamlazasi.city">
+                <label for="address">Cím</label>
+                <input type="text" class="form-control mb-2" id="address" ng-model="szamlazasi.address">
+                <input type="checkbox" id="checkdata" ng-model="same">
+                <label for="address">A szállítási adatok megegyeznek.</label>
+            </div>
+            <div>
+                <h2>Szállítási adatok</h2>
+                <label for="nameField">Név</label>
+                <input type="text" class="form-control mb-2" id="nameField2" ng-model="szallitasi.nev" ng-disabled="same">
+                <label for="telephoneField">Telefonszám</label>
+                <input type="text" class="form-control mb-2" id="telephoneField2" ng-model="szallitasi.telephone" ng-disabled="same">
+                <label for="postalCodeField">Irányítószám</label>
+                <input type="text" class="form-control mb-2" id="postalCodeField2" ng-model="szallitasi.postalcode" ng-disabled="same">
+                <label for="city">Város</label>
+                <input type="text" class="form-control mb-2" id="city2" ng-model="szallitasi.city" ng-disabled="same">
+                <label for="address">Cím</label>
+                <input type="text" class="form-control mb-2" id="address2" ng-model="szallitasi.address" ng-disabled="same">
+            </div>
+            <div>
+                <h2 class="mb-4">Fizetési mód</h2>
+                <div class="p-2 text-black bg-white rounded mb-3">
+                    <input type="radio" id="creditcard" ng-model="payment" name="payment" value="creditcard">
+                    <label for="creditcard">Bankkártya</label>
+                </div>
+                <div class="p-2 text-black bg-white rounded mb-3">
+                    <input type="radio" id="cash" ng-model="payment" name="payment" value="cash">
+                    <label for="cash">Készpénz</label>
+                </div>
+                <button class="btn py-2 text-white mb-3 w-100" id="rendelesBtn" ng-click="megrendeles()" type="submit">Megrendelés</button>
+            </div>
+        </div>
+    </div>
+</div>
