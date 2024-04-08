@@ -37,3 +37,11 @@
 .inputDB{
     width: 100px;
 }
+#rendelesBtn{
+    margin-top: 5px;
+    background-color: #1e1e1e;
+}
+#rendelesBtn:hover{
+    background-color: #1e1e1e;
+    filter: brightness(0.9);
+}
