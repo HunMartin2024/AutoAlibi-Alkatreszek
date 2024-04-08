@@ -16,9 +16,6 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#!/mainMenu/webshop">Webshop</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#!/mainMenu/settings">Beállítások</a>
-                    </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -52,23 +49,27 @@
                     <th scope="col">Termék képe</th>
                     <th scope="col">Mennyiség</th>
                     <th scope="col">Ár</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-if="message.length != 0">
-                    <td colspan="4">{{message}}</td>
+                    <td colspan="5">{{message}}</td>
                 </tr>
                 <tr ng-repeat="item in items">
                     <td class="bg-white text-black">{{item.nev}}</td>
                     <td class="bg-white text-black"><img src="/frontend/Assets/img{{item.kep}}" height="50"></td>
                     <td class="bg-white text-black">{{item.mennyiseg}}</td>
                     <td class="bg-white text-black">{{item.ar * item.mennyiseg}} Ft</td>
+                    <td class="bg-white text-black"><button class="btn py-2 text-white bg-danger" ng-click="torles(item.id)" type="submit">Törlés</button></td>
                 </tr>
                 <tr>
                     <td colspan="3">Összesen:{{items.length}}</td>
                     <td>{{osszeg}} Ft</td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
+        <button class="btn py-2 text-white mb-3" id="rendelesBtn" ng-click="fizetes()" ng-if="items.length != 0" type="submit">Tovább a fizetéshez!</button>
     </div>
 </div>

@@ -1,5 +1,5 @@
 <div id="mainMenu">
-    <nav class="navbar navbar-expand-lg mb-5">
+    <nav class="navbar navbar-expand-lg mb-5" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><h1><span>AutóAlibi</span> Alkatrészek</h1></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,14 +16,15 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="#!/mainMenu/webshop">Webshop</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#!/mainMenu/settings">Beállítások</a>
-                    </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <div class="d-flex flex-row align-items-center">
-                            <div  id="userText" class="d-flex flex-column align-items-center">
+                            <a href="#!/mainMenu/webshopCart" id="kosar" class="d-flex flex-column align-items-center">
+                                <i class="bi bi-cart3 fa-2x"></i>
+                                <p class="text-center">Kosár{{}}</p>
+                            </a>
+                            <div id="userText" class="d-flex flex-column align-items-center">
                                 <i class="bi bi-person-circle fa-2x"></i>
                                 <p class="text-center">{{user.nev}}</p>
                             </div>
@@ -39,13 +40,13 @@
     </nav>
     <div class="order">
         <div class="orderText">
-            <h2>Rendeléseim</h2>
+            <h2>Kosár</h2>
         </div>
         <table id="rendelesek">
             <thead>
                 <tr>
                     <th scope="col">Termék neve</th>
-                    <th scope="col">Cikkszám</th>
+                    <th scope="col">Termék képe</th>
                     <th scope="col">Mennyiség</th>
                     <th scope="col">Ár</th>
                 </tr>
