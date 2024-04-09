@@ -79,7 +79,7 @@ app.post('/login', async function(req, res){
         const compare = await bcrypt.compare(password, results[0].password);
         if(!compare) return res.status(400).send({msg: {description: "Hibás e-mail/jelszó!", type: "error"}});
         
-        res.send({msg: {description: "Sikeres bejelentkezés!", type: "success"}, user: {nev: results[0].name, email: results[0].email}});
+        res.send({msg: {description: "Sikeres bejelentkezés!", type: "success"}, user: {nev: results[0].name, email: results[0].email, id: results[0].id}});
     })
 })
 
@@ -171,16 +171,26 @@ app.post('/verifyEmail', async function (req, res){
 })
 
 app.get('/webshopItems', async function(req, res){
-    const {type} = req.query
+    const {type, search} = req.query
     if(!type){
         return res.status(400).send({msg: {description: "Nincs típus megadva!", type: "error"}});
     }
-    pool.query(`SELECT * FROM items WHERE AlkatreszTipus = '${type}'`, async (err, results)=>{
-        if(err){
-            return res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
-        }
-        res.send(results)
-    })
+    if (search) {
+        // ha van search query akkor a keresés alapján kérjük le az elemeket
+        pool.query(`SELECT * FROM items WHERE AlkatreszTipus = '${type}' AND nev LIKE '%${search}%'`, async (err, results)=>{
+            if(err){
+                return res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
+            }
+            res.send(results)
+        })
+    } else {
+        pool.query(`SELECT * FROM items WHERE AlkatreszTipus = '${type}'`, async (err, results)=>{
+            if(err){
+                return res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
+            }
+            res.send(results)
+        })
+    }
 })
 
 app.post('/webshopCart', async function(req, res){
@@ -194,10 +204,9 @@ app.post('/webshopCart', async function(req, res){
     })
 })
 app.post('/order', async function(req, res){
-    console.log(req.body)
-    const {szamlazasi, szallitasi, kosar, fizetesimod} = req.body;
-    if(!szallitasi || !szamlazasi || !kosar || !fizetesimod) return  res.status(400).send({msg: {description: "Hiányzó adatok!", type: "error"}})
-    pool.query(`INSERT INTO orders (szamnev, szamtel, szamiranyitoszam, szamvaros, szamcim, szallnev, szalltel, szalliranyitoszam, szallvaros, szallcim, fizetestipus, rendeles) VALUES ('${szamlazasi.nev}', '${szamlazasi.telephone}', '${szamlazasi.postalcode}', '${szamlazasi.city}', '${szamlazasi.address}', '${szallitasi.nev}', '${szallitasi.telephone}', '${szallitasi.postalcode}', '${szallitasi.city}', '${szallitasi.address}', '${fizetesimod}', '${JSON.stringify(kosar)}')`, async (err, results) =>{
+    const {szamlazasi, szallitasi, kosar, fizetesimod, userid} = req.body;
+    if(!szallitasi || !szamlazasi || !kosar || !fizetesimod || !userid) return  res.status(400).send({msg: {description: "Hiányzó adatok!", type: "error"}})
+    pool.query(`INSERT INTO orders (szamnev, szamtel, szamiranyitoszam, szamvaros, szamcim, szallnev, szalltel, szalliranyitoszam, szallvaros, szallcim, fizetestipus, rendeles, userid) VALUES ('${szamlazasi.nev}', '${szamlazasi.telephone}', '${szamlazasi.postalcode}', '${szamlazasi.city}', '${szamlazasi.address}', '${szallitasi.nev}', '${szallitasi.telephone}', '${szallitasi.postalcode}', '${szallitasi.city}', '${szallitasi.address}', '${fizetesimod}', '${JSON.stringify(kosar)}', '${userid}')`, async (err, results) =>{
         if(err){
             console.error(err)
             res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
@@ -205,7 +214,55 @@ app.post('/order', async function(req, res){
         }
         res.send({msg: {description: "Sikeres rendelés!", type: "success"}})
     });
+})
+app.get('/orders/:userid', async function(req, res){
+    const {userid} = req.params
+    if(!userid) return  res.status(400).send({msg: {description: "UserID hiányzik!", type: "error"}})
+    pool.query(`SELECT * FROM orders WHERE userid = '${userid}' ORDER BY id ASC`, async (err, results) =>{
+        if(err){
+            console.error(err)
+            res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
+            return
+        }
+        if(!results[0]) return res.sendStatus(400);
+        let array =  []
 
+        let itemsPromise = new Promise((resolve) => {
+            let len = results.length;
+            let counter = 0;
+
+            results.forEach((result, index) => {
+                let data = {}
+                data.rszam = `#${result.id.toString().padStart(10,"0")}`
+                data.items = [];
+                let orders = JSON.parse(result.rendeles)
+                pool.query(`SELECT * FROM items WHERE id in (${Object.keys(orders).join(", ")}) ORDER BY FIND_in_set(id, "${Object.keys(orders).join(", ")}");`, async (err, results) =>{
+                    if(err){
+                        console.error(err)
+                        res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
+                        return
+                    }
+                    if(!results[0]) return res.sendStatus(400);
+                    data.items = results.map(result =>{
+                        return {
+                            nev: result.nev,
+                            kep: result.kep,
+                            mennyiseg: orders[result.id].count,
+                            ar: result.Ar
+                        }
+                    })
+                    array.push(data)
+                    counter++;
+                    if (counter == len) resolve()
+                });
+            });
+        });
+
+
+        itemsPromise.then(() => {
+            res.send(array)
+        });
+    })
 })
 app.listen(port, () => {
     console.log(`Server listening on port ${port}...`);
