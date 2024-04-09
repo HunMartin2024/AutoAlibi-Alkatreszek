@@ -51,7 +51,6 @@ app.config(function($routeProvider){
     })
     .when('/mainMenu/contact', {
         templateUrl: 'Views/contact.html',
-        controller: 'contactCtrl',
         resolve: {
             function($rootScope, $location) {
                 if(!$rootScope.user.email){
@@ -97,8 +96,9 @@ app.config(function($routeProvider){
         controller: 'userDataCtrl',
         resolve: {
             function($rootScope, $location) {
-                if(!$rootScope.user.email){
-                    $location.path('/')
+                console.log(Object.values($rootScope.kosar).length);
+                if(!$rootScope.user.email || Object.values($rootScope.kosar).length == 0){
+                    $location.path('/mainMenu')
                 }
             }
         }
