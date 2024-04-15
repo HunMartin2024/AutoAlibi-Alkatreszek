@@ -1,17 +1,17 @@
 app.controller('newPassCtrl', function($scope, $rootScope, $location){
     $scope.passwords = {}
     $scope.messages = []
-    $scope.passVisible = "password";
-    $scope.icon = "fa-eye";
-    $scope.passToggle =  function(){
-        if($scope.passVisible == "password")
+    $scope.passVisible = ["password", "password"];
+    $scope.icon = ["fa-eye", "fa-eye"];
+    $scope.passToggle =  function(index){
+        if($scope.passVisible[index] == "password")
         {
-            $scope.passVisible = "text"
-            $scope.icon = "fa-eye-slash";
+            $scope.passVisible[index] = "text"
+            $scope.icon[index] = "fa-eye-slash";
         }
         else{
-            $scope.passVisible = "password"
-            $scope.icon = "fa-eye";
+            $scope.passVisible[index] = "password"
+            $scope.icon[index]  = "fa-eye";
         }
     }
     $scope.changePwd = async function(){
