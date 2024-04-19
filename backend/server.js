@@ -233,53 +233,51 @@ app.post('/order', async function(req, res){
     })
 })
 app.get('/orders/:userid', async function(req, res){
-    const {userid} = req.params
+    const {userid} = req.params;
+    let rendelesek = [];
     if(!userid) return  res.status(400).send({msg: {description: "UserID hiányzik!", type: "error"}})
-    pool.query(`SELECT * FROM orders WHERE userid = '${userid}' ORDER BY id ASC`, async (err, results) =>{
-        if(err){
-            console.error(err)
-            res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
-            return
+    
+    // Lekérdezzük az összes felhasználóhoz tartozó rendelés összes adatát, valamint a rendelésben lévő item adatait is
+    pool.query(`SELECT * FROM orders INNER JOIN items ON items.id = orders.itemId WHERE userId = ${userid}`, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send({ msg: { description: "Adatbázis hiba!", type: "error" } });
         }
-        if(!results[0]) return res.sendStatus(400);
-        let array =  []
 
-        let itemsPromise = new Promise((resolve) => {
-            let len = results.length;
-            let counter = 0;
+        // csinálunk egy tömböt amiben csak a rendelés számok szerepelnek egyszer.
+        const rendelesIds = [...new Set(results.map(r => r.customerDataId))];
 
-            results.forEach((result, index) => {
-                let data = {}
-                data.rszam = `#${result.id.toString().padStart(10,"0")}`
-                data.items = [];
-                let orders = JSON.parse(result.rendeles)
-                pool.query(`SELECT * FROM items WHERE id in (${Object.keys(orders).join(", ")}) ORDER BY FIND_in_set(id, "${Object.keys(orders).join(", ")}");`, async (err, results) =>{
-                    if(err){
-                        console.error(err)
-                        res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
-                        return
+        // Végigmegyünk a rendelés ID-ken
+        rendelesIds.forEach(id => {
+            // Felvesszük az elemeket a megfelelő rendelés ID-hez
+            rendelesek.push({
+                // rendelés száma
+                rszam: `#${id.toString().padStart(10, '0')}`,
+                // rendelésben található elemek darabszáma
+                db: results.filter(r => r.customerDataId == id).length,
+                // rendelés teljes összege
+                teljesOsszeg: results.map(r => {
+                    // csak akkor vesszük fel a tömbbe az elemet ha a megfelelő rendelés ID-vel rendelkezik
+                    if (r.customerDataId == id) {
+                        return r.ar * r.count
                     }
-                    if(!results[0]) return res.sendStatus(400);
-                    data.items = results.map(result =>{
+                }).filter(r => r !== undefined).reduce((acc, curr) => {return curr + acc}),
+                // hozzáadjuk az összes rendelésben lévő elem adatait, amelyeket megjelenítünk
+                items: results.map(r => {
+                    if (r.customerDataId == id) {
                         return {
-                            nev: result.nev,
-                            kep: result.kep,
-                            mennyiseg: orders[result.id].count,
-                            ar: result.Ar
+                            nev: r.nev,
+                            kep: r.kep,
+                            ar: r.ar,
+                            mennyiseg: r.count
                         }
-                    })
-                    array.push(data)
-                    counter++;
-                    if (counter == len) resolve()
-                });
+                    }
+                }).filter(r => r !== undefined) // elemek szűrése
             });
         });
 
-
-        itemsPromise.then(() => {
-            res.send(array)
-        });
-    })
+        res.send(rendelesek);
+    });
 })
 app.listen(port, () => {
     console.log(`Server listening on port ${port}...`);
