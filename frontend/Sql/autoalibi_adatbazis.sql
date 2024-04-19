@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Ápr 09. 19:55
+-- Létrehozás ideje: 2024. Ápr 19. 18:14
 -- Kiszolgáló verziója: 10.4.24-MariaDB
 -- PHP verzió: 8.1.6
 
@@ -20,6 +20,43 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `autoalibi_adatbazis`
 --
+CREATE DATABASE IF NOT EXISTS `autoalibi_adatbazis` DEFAULT CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
+USE `autoalibi_adatbazis`;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `customerdata`
+--
+
+CREATE TABLE `customerdata` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `sznev` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
+  `sztel` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
+  `szirsz` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
+  `szvar` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
+  `szcim` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
+  `szallnev` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
+  `szalltel` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
+  `szallirsz` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
+  `szallvar` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
+  `szallcim` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
+  `ftipus` varchar(255) COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `customerdata`
+--
+
+INSERT INTO `customerdata` (`id`, `userId`, `sznev`, `sztel`, `szirsz`, `szvar`, `szcim`, `szallnev`, `szalltel`, `szallirsz`, `szallvar`, `szallcim`, `ftipus`) VALUES
+(1, 15, 'Martin Rátkai', 'undefined', '6445', 'Borota', 'Dózsa György utca 7.', 'Martin Rátkai', 'undefined', '6445', 'Borota', 'Dózsa György utca 7.', 'creditcard'),
+(2, 15, 'Martin Rátkai', 'undefined', '6445', 'Borota', 'Dózsa György utca 7.', 'Martin Rátkai', 'undefined', '6445', 'Borota', 'Dózsa György utca 7.', 'creditcard'),
+(3, 15, 'Martin Rátkai', 'undefined', '6445', 'Borota', 'Dózsa György utca 7.', 'Martin Rátkai', 'undefined', '6445', 'Borota', 'Dózsa György utca 7.', 'cash'),
+(4, 15, 'Martin Rátkai', '06301434427', '6445', 'Borota', 'Dózsa György utca 7.', 'Martin Rátkai', '06301434427', '6445', 'Borota', 'Dózsa György utca 7.', 'cash'),
+(5, 15, 'Martin Rátkai', '06301434427', '6445', 'Borota', 'Dózsa György utca 7.', 'Martin Rátkai', '06301434427', '6445', 'Borota', 'Dózsa György utca 7.', 'cash'),
+(6, 15, 'Martin Rátkai', '06301434427', '6445', 'Borota', 'Dózsa György utca 7.', 'Martin Rátkai', '06301434427', '6445', 'Borota', 'Dózsa György utca 7.', 'creditcard'),
+(7, 15, 'Martin Rátkai', '06301434427', '6445', 'Borota', 'Dózsa György utca 7.', 'Martin Rátkai', '06301434427', '6445', 'Borota', 'Dózsa György utca 7.', 'cash');
 
 -- --------------------------------------------------------
 
@@ -29,19 +66,19 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `items` (
   `id` int(11) NOT NULL,
-  `nev` varchar(100) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `kep` varchar(255) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `adatok` varchar(255) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `JarmuTipus` varchar(100) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `AlkatreszTipus` varchar(100) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `Ar` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+  `nev` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `kep` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
+  `adatok` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
+  `jarmuTipus` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `alkatreszTipus` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `ar` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
 -- A tábla adatainak kiíratása `items`
 --
 
-INSERT INTO `items` (`id`, `nev`, `kep`, `adatok`, `JarmuTipus`, `AlkatreszTipus`, `Ar`) VALUES
+INSERT INTO `items` (`id`, `nev`, `kep`, `adatok`, `jarmuTipus`, `alkatreszTipus`, `ar`) VALUES
 (1, 'Biztosítékok', '/Belso-felszereles/CarFuse.webp', 'Áramerősség: 5A, 7,5A, 10A, 15A, 20A, 25A, 30A', 'Audi', 'belsofelszereles', 2540),
 (2, 'Gumiszőnyeg', '/Belso-felszereles/CarMat.webp', 'Gumi szőnyeg', 'Audi', 'belsofelszereles', 9870),
 (3, 'Benzines kanna', '/Belso-felszereles/GasTank.webp', 'Műanyag 5l', '', 'belsofelszereles', 6770),
@@ -92,29 +129,29 @@ INSERT INTO `items` (`id`, `nev`, `kep`, `adatok`, `JarmuTipus`, `AlkatreszTipus
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `szamnev` varchar(255) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `szamtel` varchar(11) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `szamiranyitoszam` int(4) NOT NULL,
-  `szamvaros` varchar(255) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `szamcim` varchar(255) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `szallnev` varchar(255) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `szalltel` varchar(11) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `szalliranyitoszam` int(4) NOT NULL,
-  `szallvaros` varchar(255) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `szallcim` varchar(255) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `fizetestipus` varchar(10) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `rendeles` varchar(10000) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `userid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+  `userId` int(11) NOT NULL,
+  `customerDataId` int(11) NOT NULL,
+  `itemId` int(11) NOT NULL,
+  `count` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
 -- A tábla adatainak kiíratása `orders`
 --
 
-INSERT INTO `orders` (`id`, `szamnev`, `szamtel`, `szamiranyitoszam`, `szamvaros`, `szamcim`, `szallnev`, `szalltel`, `szalliranyitoszam`, `szallvaros`, `szallcim`, `fizetestipus`, `rendeles`, `userid`) VALUES
-(1, 'Martin Rátkai', '06301434427', 6445, 'Borota', 'Dózsa György utca 7.', 'Martin Rátkai', '06301434427', 6445, 'Borota', 'Dózsa György utca 7.', 'creditcard', '{\"7\":{\"count\":1},\"9\":{\"count\":1},\"26\":{\"count\":2},\"35\":{\"count\":3}}', 15),
-(2, 'Martin Rátkai', '06301434427', 6445, 'Borota', 'Dózsa György utca 7.', 'Martin Rátkai', '06301434427', 6445, 'Borota', 'Dózsa György utca 7.', 'cash', '{\"7\":{\"count\":1},\"9\":{\"count\":1},\"22\":{\"count\":4},\"23\":{\"count\":6},\"26\":{\"count\":2},\"35\":{\"count\":3}}', 15),
-(3, 'Martin Rátkai', '06301434427', 6445, 'Borota', 'Dózsa György utca 7.', 'Martin Rátkai', '06301434427', 6445, 'Borota', 'Dózsa György utca 7.', 'cash', '{\"7\":{\"count\":1},\"9\":{\"count\":1},\"22\":{\"count\":4},\"23\":{\"count\":6},\"26\":{\"count\":2},\"35\":{\"count\":3}}', 15);
+INSERT INTO `orders` (`id`, `userId`, `customerDataId`, `itemId`, `count`) VALUES
+(1, 15, 6, 22, 1),
+(2, 15, 7, 35, 10),
+(3, 15, 7, 1, 10),
+(4, 15, 7, 3, 10),
+(5, 15, 7, 17, 4),
+(6, 15, 7, 19, 5),
+(7, 15, 7, 20, 10),
+(8, 15, 7, 22, 1),
+(9, 15, 7, 23, 2),
+(10, 15, 7, 25, 4),
+(11, 15, 7, 24, 3),
+(12, 15, 7, 38, 10);
 
 -- --------------------------------------------------------
 
@@ -124,23 +161,30 @@ INSERT INTO `orders` (`id`, `szamnev`, `szamtel`, `szamiranyitoszam`, `szamvaros
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `name` varchar(50) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_hungarian_ci NOT NULL,
-  `verifyEmail` varchar(100) COLLATE utf8mb4_hungarian_ci DEFAULT NULL,
-  `passToken` varchar(100) COLLATE utf8mb4_hungarian_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
+  `name` varchar(50) COLLATE utf8_hungarian_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
+  `verifyEmail` varchar(100) COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `passToken` varchar(100) COLLATE utf8_hungarian_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
 -- A tábla adatainak kiíratása `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `verifyEmail`, `passToken`) VALUES
-(15, 'teszt', 'ratkaimartin2021@gmail.com', '$2b$10$UQzMKX97W8KkvcJQYFaQaOfQDwdZalgt.KtIJqu9q5CLgypOWqsom', 'kiqyvw4kCVXSGPI9K8GnYcYrHVw8YqUK2onrON4oVGAHDWzbtqhzYcMQICQwc9ah7UqwgvF1yCzXekpDFmeQVSeVJzWPplfySz2Y', 'rhdHzLMsPGbrmNqXIAiyQb024dCOFWuXthvIufhTmChKOcPzpy9mrj37XR0QcFjUbh2rO5KO3ODbF1Zq9ecJhAUrhSv7fR4OcCN5');
+(15, 'teszt', 'ratkaimartin2021@gmail.com', '$2b$10$zmhG6Lq8Ur449HR94GSE8uwivdhqBFD8VvzaiuIjmAsxkvolis2hO', 'kiqyvw4kCVXSGPI9K8GnYcYrHVw8YqUK2onrON4oVGAHDWzbtqhzYcMQICQwc9ah7UqwgvF1yCzXekpDFmeQVSeVJzWPplfySz2Y', NULL);
 
 --
 -- Indexek a kiírt táblákhoz
 --
+
+--
+-- A tábla indexei `customerdata`
+--
+ALTER TABLE `customerdata`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userId` (`userId`);
 
 --
 -- A tábla indexei `items`
@@ -153,7 +197,9 @@ ALTER TABLE `items`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `userid` (`userid`);
+  ADD KEY `userId` (`userId`),
+  ADD KEY `itemId` (`itemId`),
+  ADD KEY `customerDataId` (`customerDataId`);
 
 --
 -- A tábla indexei `users`
@@ -166,6 +212,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT a táblához `customerdata`
+--
+ALTER TABLE `customerdata`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT a táblához `items`
 --
 ALTER TABLE `items`
@@ -175,7 +227,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT a táblához `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT a táblához `users`
@@ -188,10 +240,18 @@ ALTER TABLE `users`
 --
 
 --
+-- Megkötések a táblához `customerdata`
+--
+ALTER TABLE `customerdata`
+  ADD CONSTRAINT `customerdata_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`);
+
+--
 -- Megkötések a táblához `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`customerDataId`) REFERENCES `customerdata` (`id`),
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`itemId`) REFERENCES `items` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
