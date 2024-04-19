@@ -18,7 +18,7 @@ app.controller('webshopItemsCtrl', function($scope, $rootScope, $location){
                     tipus: item.tipus,
                     adatok: item.adatok.split(';'),
                     kep: item.kep,
-                    ar: item.Ar,
+                    ar: item.ar,
                     id: item.id
                 })
             });

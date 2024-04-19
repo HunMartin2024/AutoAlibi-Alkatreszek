@@ -12,13 +12,13 @@ app.controller('webshopCartCtrl', function($scope, $rootScope, $route, $location
         axios.post(`${$rootScope.backendURL}/webshopCart`, parsed).then(res =>{
             const data = res.data;
             data.forEach(item => {
-                $scope.osszeg += parseInt(item.Ar) * $rootScope.kosar[item.id].count;
+                $scope.osszeg += parseInt(item.ar) * $rootScope.kosar[item.id].count;
                 $scope.items.push( {
                     id: item.id,
                     nev: item.nev,
                     kep: item.kep,
                     mennyiseg: $rootScope.kosar[item.id].count,
-                    ar: item.Ar,
+                    ar: item.ar,
                 })
             });
             $scope.$apply();
