@@ -8,7 +8,6 @@ app.controller('webshopCartCtrl', function($scope, $rootScope, $route, $location
     }
     else{
         let parsed = JSON.parse(kosar)
-        console.log(parsed)
         axios.post(`${$rootScope.backendURL}/webshopCart`, parsed).then(res =>{
             const data = res.data;
             data.forEach(item => {

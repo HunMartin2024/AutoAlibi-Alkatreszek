@@ -5,7 +5,6 @@ app.controller('registerCtrl', function($scope, $rootScope, $location, $timeout)
         $scope.messages = [];
         try {
             const result = await axios.post(`${$rootScope.backendURL}/register`, $scope.reguser);
-            console.log(result);
             $scope.messages.push(result.data.msg)
         } catch (error) {
             $scope.messages.push(error.response.data?.msg)

@@ -96,7 +96,6 @@ app.config(function($routeProvider){
         controller: 'userDataCtrl',
         resolve: {
             function($rootScope, $location) {
-                console.log(Object.values($rootScope.kosar).length);
                 if(!$rootScope.user.email || Object.values($rootScope.kosar).length == 0){
                     $location.path('/mainMenu')
                 }

@@ -18,7 +18,6 @@ app.controller('loginCtrl', function($scope, $rootScope, $timeout, $location){
         $scope.messages = [];
         try {
             const result = await axios.post(`${$rootScope.backendURL}/login`, $scope.loguser);
-            console.log(result);
             $scope.messages.push(result.data.msg)
             $rootScope.user = result.data.user;
             sessionStorage.setItem("user", JSON.stringify(result.data.user))
