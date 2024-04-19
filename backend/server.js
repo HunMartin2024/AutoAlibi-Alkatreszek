@@ -206,14 +206,31 @@ app.post('/webshopCart', async function(req, res){
 app.post('/order', async function(req, res){
     const {szamlazasi, szallitasi, kosar, fizetesimod, userid} = req.body;
     if(!szallitasi || !szamlazasi || !kosar || !fizetesimod || !userid) return  res.status(400).send({msg: {description: "Hiányzó adatok!", type: "error"}})
-    pool.query(`INSERT INTO orders (szamnev, szamtel, szamiranyitoszam, szamvaros, szamcim, szallnev, szalltel, szalliranyitoszam, szallvaros, szallcim, fizetestipus, rendeles, userid) VALUES ('${szamlazasi.nev}', '${szamlazasi.telephone}', '${szamlazasi.postalcode}', '${szamlazasi.city}', '${szamlazasi.address}', '${szallitasi.nev}', '${szallitasi.telephone}', '${szallitasi.postalcode}', '${szallitasi.city}', '${szallitasi.address}', '${fizetesimod}', '${JSON.stringify(kosar)}', '${userid}')`, async (err, results) =>{
-        if(err){
-            console.error(err)
-            res.status(500).send({msg: {description: "Adatbázis hiba!", type: "error"}})
-            return
+
+    // Vásárló adatainak felvétele a vásárló adatokhoz.
+    pool.query(`INSERT INTO customerdata (userId, sznev, sztel, szirsz, szvar, szcim, szallnev, szalltel, szallirsz, szallvar, szallcim, ftipus) VALUES ('${userid}', '${szamlazasi.nev}', '${szamlazasi.telephone}', '${szamlazasi.postalcode}', '${szamlazasi.city}', '${szamlazasi.address}', '${szallitasi.nev}', '${szallitasi.telephone}', '${szallitasi.postalcode}', '${szallitasi.city}', '${szallitasi.address}', '${fizetesimod}')`, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send({ msg: { description: "Adatbázis hiba!", type: "error" } })
         }
-        res.send({msg: {description: "Sikeres rendelés!", type: "success"}})
-    });
+
+        // Felvétel után elmentjük az új sor ID-jét
+        const customerDataId = results.insertId;
+
+        // Végigmegyünk a kosár elemein és felvesszük a rendelésekhez a megfelelő customerDataId-vel
+        for (let i = 0; i < Object.keys(kosar).length; i++) {
+            const itemId = Object.keys(kosar)[i];
+            const count = kosar[`${itemId}`].count;
+
+            pool.query(`INSERT INTO orders (userId, customerDataId, itemId, count) VALUES ('${userid}', '${customerDataId}', '${itemId}', '${count}')`, (err, results) => {
+                if (err) {
+                    console.error(err);
+                    return res.status(500).send({msg: { description: "Adatbázis hiba!", type: "error" } });
+                }
+            });
+        }
+        res.send({ msg: { description: "Rendelés sikeresen elküldve!", type: "success" } });
+    })
 })
 app.get('/orders/:userid', async function(req, res){
     const {userid} = req.params
