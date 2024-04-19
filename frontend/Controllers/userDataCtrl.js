@@ -4,6 +4,12 @@ app.controller('userDataCtrl', function($scope, $rootScope, $location){
     $scope.szamlazasi = {};
     $scope.same = false;
 
+    $scope.sameChange = function() {
+        if($scope.same){
+            $scope.szallitasi = $scope.szamlazasi;
+        }
+    }
+
     $scope.megrendeles = function(){
         if($scope.same){
             $scope.szallitasi = $scope.szamlazasi;
