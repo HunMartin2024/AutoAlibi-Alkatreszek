@@ -25,6 +25,7 @@ app.controller('userDataCtrl', function($scope, $rootScope, $location){
                 $rootScope.kosar = {};
                 localStorage.setItem("kosar", JSON.stringify($rootScope.kosar));
                 $location.path('/mainMenu')
+                $scope.$apply()
             }
         });
     }
