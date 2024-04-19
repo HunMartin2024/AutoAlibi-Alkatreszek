@@ -55,7 +55,7 @@
                 <input type="text" class="form-control mb-2" id="city" ng-model="szamlazasi.city">
                 <label for="address">Cím</label>
                 <input type="text" class="form-control mb-2" id="address" ng-model="szamlazasi.address">
-                <input type="checkbox" id="checkdata" ng-model="same">
+                <input type="checkbox" id="checkdata" ng-model="same" ng-change="sameChange()">
                 <label for="address">A szállítási adatok megegyeznek.</label>
             </div>
             <div>
